@@ -43,7 +43,7 @@ class AuthVC: UIViewController {
             let password = inputPassword.text
             let params = ["email": email, "password": password]
             
-            AF.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding:  JSONEncoding.default, headers: nil).responseJSON {
+            AF.request("https://api.pinploy.com/api/users", method: .post, parameters: params as Parameters, encoding:  JSONEncoding.default, headers: nil).responseJSON {
                 response in
                 switch (response.result) {
                 case .success:
@@ -56,7 +56,7 @@ class AuthVC: UIViewController {
     
     
     func redirectHome() {
-        
+        print("Redirect home")
     }
   
 

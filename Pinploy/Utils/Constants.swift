@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct Constants {
+    static let baseUrl = "https://api.pinploy.com/api/"
+    static let userUrl = "/users/login"
+}
