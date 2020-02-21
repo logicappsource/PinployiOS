@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Serpent
 
 struct Task {
     var title: String = ""
@@ -32,22 +33,41 @@ struct Task {
         case erased = "erased"
     }
     var userId: Int? = 1
-    
-    
-    init(title: String, description: String, toolsNeeded: Bool, isRemote: Bool, address: String, city: String, zipCode: String, lat: Double, lng: Double, budget: Double, budgetType: String, estimationHours: Double, dueDate: String, status: String, userId: Int ) {
-        self.title = title
-        self.description = description
-        self.toolsNeeded = toolsNeeded
-        self.isRemote = isRemote
-        self.address = address
-        self.city = city
-        self.zipCode = zipCode
-        self.lat = lat
-        self.lng = lng
-        self.budget = budget
-       // Task.self.budgetType = budgetType
-        self.estimationHours = estimationHours
-        self.dueDate = dueDate
-        //Task.self.status = status
+}
+
+
+extension Task: Serializable {
+    init(dictionary: NSDictionary?) {
+        title           <== (self, dictionary, "title")
+        description     <== (self, dictionary, "description")
+        toolsNeeded     <== (self, dictionary, "tools_needed")
+        isRemote        <== (self, dictionary, "is_remote")
+        address         <== (self, dictionary, "address")
+        city            <== (self, dictionary, "city")
+        zipCode         <== (self, dictionary, "zip_code")
+        lat             <== (self, dictionary, "lat")
+        lng             <== (self, dictionary, "lng")
+        budget          <== (self, dictionary, "budget")
+        estimationHours <== (self, dictionary, "estimation_hours")
+        dueDate         <== (self, dictionary, "due_date")
+        userId          <== (self, dictionary, "user_id")
+    }
+
+    func encodableRepresentation() -> NSCoding {
+        let dict = NSMutableDictionary()
+        (dict, "title")            <== title
+        (dict, "description")      <== description
+        (dict, "tools_needed")     <== toolsNeeded
+        (dict, "is_remote")        <== isRemote
+        (dict, "address")          <== address
+        (dict, "city")             <== city
+        (dict, "zip_code")         <== zipCode
+        (dict, "lat")              <== lat
+        (dict, "lng")              <== lng
+        (dict, "budget")           <== budget
+        (dict, "estimation_hours") <== estimationHours
+        (dict, "due_date")         <== dueDate
+        (dict, "user_id")          <== userId
+        return dict
     }
 }

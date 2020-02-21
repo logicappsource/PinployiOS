@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Alamofire
 
 class TaskTableViewController: UITableViewController {
+    
+    @IBOutlet weak var taskTableView: UITableView!
+    
+    public var taskData = [Task]() // type task
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,29 +23,50 @@ class TaskTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        fetchTasks()
     }
+    
+    
+    func fetchTasks(){
+        let headers: HTTPHeaders = [
+"Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjc3Nywicm9sZSI6InVzZXIiLCJpYXQiOjE1ODIyMzAyMDgsImV4cCI6MTU4MjgzNTAwOH0.OI1ZH9bAQNlm4MlNY6D9Kd3cVlvl1gpgz3X56zKmcBk"
+            ]
+        AF.request("https://api.pinploy.com/tasks", method: .get, headers: headers).responseJSON { response in
+            switch (response.result) {
+            case .success:
+                print(response.result)
+             /*
+                    for task in response.result {
+                        self.taskData.append(task)
+                    }
+                */
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return taskData.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) // type cast table cell
+        //cell.task = taskData[indexPath.row]
+    
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

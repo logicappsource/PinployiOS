@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Serpent
 
 struct Comment {
     var id: Int? = 0
@@ -14,26 +15,43 @@ struct Comment {
     var status: String? = ""
     
     var userId: Int? = 0
-    var user: User
+    var user: User?
     
     var taskId: Int? = 0
-    var task: Task
+    var task: Task?
     
     var createdAt: String? = ""
     var updatedAt: String? = ""
     var images = [Any]()
     
-    
-    init(id: Int, text: String, status: String, userId: Int, user: User, taskId: Int, task: Task, createdAt: String, updatedAt: String, images: [Any]){
-        self.id = id
-        self.text = text
-        self.status = status
-        self.userId = userId
-        self.user = user
-        self.task = task
-        self.taskId = taskId
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
+}
+
+extension Comment: Serializable {
+    init(dictionary: NSDictionary?) {
+        id        <== (self, dictionary, "id")
+        text      <== (self, dictionary, "text")
+        status    <== (self, dictionary, "status")
+        userId    <== (self, dictionary, "user_id")
+        user      <== (self, dictionary, "user")
+        taskId    <== (self, dictionary, "task_id")
+        task      <== (self, dictionary, "task")
+        createdAt <== (self, dictionary, "created_at")
+        updatedAt <== (self, dictionary, "updated_at")
+        images    <== (self, dictionary, "images")
     }
-    
+
+    func encodableRepresentation() -> NSCoding {
+        let dict = NSMutableDictionary()
+        (dict, "id")         <== id
+        (dict, "text")       <== text
+        (dict, "status")     <== status
+        (dict, "user_id")    <== userId
+        (dict, "user")       <== user
+        (dict, "task_id")    <== taskId
+        (dict, "task")       <== task
+        (dict, "created_at") <== createdAt
+        (dict, "updated_at") <== updatedAt
+        (dict, "images")     <== images
+        return dict
+    }
 }

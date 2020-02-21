@@ -29,8 +29,10 @@ class AuthVC: UIViewController {
                  response in
                  switch (response.result) {
                  case .success:
-                     print(response.result)
-                     self.redirectHome()
+                    DispatchQueue.main.async {
+                        print(response.result)
+                        self.redirectHome()
+                    }
                  case .failure:
                      print(Error.self)
                  }
@@ -47,7 +49,11 @@ class AuthVC: UIViewController {
                 response in
                 switch (response.result) {
                 case .success:
-                    print(response.result)
+                    DispatchQueue.main.async {
+                        print(response.result)
+                        self.redirectHome()
+                    }
+  
                 case .failure(let error):
                     print(error)
                 }

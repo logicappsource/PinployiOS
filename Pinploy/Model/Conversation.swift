@@ -7,39 +7,58 @@
 //
 
 import Foundation
-
+import Serpent
 
 struct Conversation {
     var id: Int? = 0
     var status: String? = ""
     var message = [Any]()
     
-    var lastMessage: Message
+    var lastMessage: Message?
     var taskTitle: String? = ""
     
     var fromUserId: Int? = 0
     var toUserId: Int? = 0
-    var user: User
+    var user: User?
     
     var offerId: Int? =  0
-    var offer: Offer
+    var offer: Offer?
     
     var createdAt: String? = ""
     var updatedAt: String? = ""
-    
-    init(id: Int, status: String, message: [Any], lastMessage: Message, taskTitle: String, fromUserId: Int, toUserId: Int, user: User, offerId: Int, offer: Offer, createdAt: String, updatedAt: String) {
-        self.id = id
-        self.status = status
-        self.message = message
-        self.lastMessage = lastMessage
-        self.taskTitle = taskTitle
-        self.fromUserId = fromUserId
-        self.toUserId = toUserId
-        self.user = user
-        self.offerId = offerId
-        self.offer = offer
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
+}
+
+
+extension Conversation: Serializable {
+    init(dictionary: NSDictionary?) {
+        id          <== (self, dictionary, "id")
+        status      <== (self, dictionary, "status")
+        message     <== (self, dictionary, "message")
+        lastMessage <== (self, dictionary, "last_message")
+        taskTitle   <== (self, dictionary, "task_title")
+        fromUserId  <== (self, dictionary, "from_user_id")
+        toUserId    <== (self, dictionary, "to_user_id")
+        user        <== (self, dictionary, "user")
+        offerId     <== (self, dictionary, "offer_id")
+        offer       <== (self, dictionary, "offer")
+        createdAt   <== (self, dictionary, "created_at")
+        updatedAt   <== (self, dictionary, "updated_at")
     }
 
+    func encodableRepresentation() -> NSCoding {
+        let dict = NSMutableDictionary()
+        (dict, "id")           <== id
+        (dict, "status")       <== status
+        (dict, "message")      <== message
+        (dict, "last_message") <== lastMessage
+        (dict, "task_title")   <== taskTitle
+        (dict, "from_user_id") <== fromUserId
+        (dict, "to_user_id")   <== toUserId
+        (dict, "user")         <== user
+        (dict, "offer_id")     <== offerId
+        (dict, "offer")        <== offer
+        (dict, "created_at")   <== createdAt
+        (dict, "updated_at")   <== updatedAt
+        return dict
+    }
 }
