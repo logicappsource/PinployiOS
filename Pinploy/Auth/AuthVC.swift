@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Serpent
 
 class AuthVC: UIViewController {
 
@@ -24,20 +25,23 @@ class AuthVC: UIViewController {
              let email = inputEmail.text
              let password = inputPassword.text
              let params = ["email": email, "password": password]
-        
-             AF.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON {
-                 response in
-                 switch (response.result) {
-                 case .success:
-                    DispatchQueue.main.async {
-                        print(response.result)
-                        self.redirectHome()
+       
+                Alamofire.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON {
+                    response in
+                    switch (response.result) {
+                    case .success:
+                           print(response.result)
+                           guard let user = response.value else { return }
+                           print(user)
+                           self.redirectHome()
+                       
+                    case .failure:
+                        print(Error.self)
                     }
-                 case .failure:
-                     print(Error.self)
-                 }
-             }
-    }
+                }
+    
+        }
+        
     
     // Signup User
     @IBAction func signupUser(_ sender: Any) {
@@ -45,24 +49,24 @@ class AuthVC: UIViewController {
             let password = inputPassword.text
             let params = ["email": email, "password": password]
             
-            AF.request("https://api.pinploy.com/api/users", method: .post, parameters: params as Parameters, encoding:  JSONEncoding.default, headers: nil).responseJSON {
+            Alamofire.request("https://api.pinploy.com/api/users", method: .post, parameters: params as Parameters, encoding:  JSONEncoding.default, headers: nil).responseJSON {
                 response in
                 switch (response.result) {
                 case .success:
-                    DispatchQueue.main.async {
-                        print(response.result)
-                        self.redirectHome()
-                    }
-  
+                    self.redirectHome()
+
                 case .failure(let error):
                     print(error)
                 }
             }
+        
     }
     
     
-    func redirectHome() {
+    func redirectHome() -> Void {
         print("Redirect home")
+
+        
     }
   
 

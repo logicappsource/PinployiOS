@@ -9,7 +9,8 @@
 import Foundation
 import Serpent
 
-struct User {
+
+struct User { // codeable
     var id: Int? = 0
     var firstName: String? = ""
     var lastName: String? = ""
@@ -56,7 +57,94 @@ struct User {
     var createdAt: String? = ""
     var updatedAt: String? = ""
     
+    
+    
+    /*
+    init(id: Int, firstName: String, lastName: String, email: String, emailVerified: Bool, emailToken: String, password: String, phone: String, profileImg: String, dob: Date, gender: String, address: String, city: String, zipCode: String, description: String, education: String, isActive: Bool, stripeCustomerId: String, stripeAccountId: String, stripeVerified: Bool, profileRating: Double, tasksCreated: Int, tasksCompleted: Int, offersMade: Int, userRoleId: Int, role: [Int], tasks: [Task], offers: [Offer], comments: [Comment], targets: [User], reporters: [User], sendMessages: [Message], receivedMessages: [Message], createdConversations: [Conversation], receivedConversation: [Conversation], sendReviews: [Review], receivedReviews: [Review], createdAt: String, updatedAt: String){
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+        self.emailVerified = emailVerified
+        self.emailToken = emailToken
+        self.password = password
+        self.phone = phone
+        self.profileImg = profileImg
+        self.dob = dob
+        self.gender = gender
+        self.address = address
+        self.city = city
+        self.zipCode = zipCode
+        self.description = description
+        self.education = education
+        self.isActive = isActive
+        self.stripeCustomerId = stripeCustomerId
+        self.stripeAccountId = stripeAccountId
+        self.stripeVerified = stripeVerified
+        self.profileRating = profileRating
+        self.comments = comments
+        self.targets = targets
+        self.reporters = reporters
+        self.sendMessages = sendMessages
+        self.receivedMessages = receivedMessages
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+       }
+    */
 }
+
+/*
+extension User: Decodable {
+    enum CodingKeys: CodingKey {
+        case id = "id"
+        case firstName = "firstName"
+        case lastName = "lastName"
+        case email = "email"
+        case emailVerified = "emailVerified"
+        case emailToken = "emailtoken"
+        case password = "password"
+        case phone = "phone"
+        case profileImg = "profileImg"
+        case dob = "dob"
+        case gender = "gender"
+        case address = "address"
+        case city = "city"
+        case zipCode = "zipCode"
+        case description = "description"
+        case education = "education"
+        case isActive = "isActive"
+        case stripeCustomerId = "stripeCustomerId"
+        case stripeAccountId = "stripeAccountId"
+        case stripeVerified = "stripeVerified"
+        case profileRating = "profileRating"
+        case taskCreated = "taskCreated"
+        case tasksCompleted = "tasksCompleted"
+        case offersMade = "offersMade"
+        case userRoleId = "userRoleId"
+        case role = "role"
+        case tasks = "tasks"
+        case offers = "offers"
+        case comments = "comments"
+        case targets = "targets"
+        case reporters = "reportes"
+        case sendMessages = "sendMessages"
+        case receivedMessages = "receivedMessages"
+        case createdConversations = "createdConversations"
+        case receivedConversations = "receivedConversations"
+        case sendReviews = "sendReviews"
+        case receivedRevies = "receivedRevies"
+        case createdAt = "createdAt"
+        case updatedAt = "updatedAt"
+}
+    
+    init(from decoder: Decoder) throws {
+        let cointainer = try.encoder.container(keyedBy: CodingKeys.self)
+        
+        
+        self.init(id: id)
+    }
+}
+*/
 
 extension User: Serializable {
     init(dictionary: NSDictionary?) {
@@ -145,3 +233,4 @@ extension User: Serializable {
         return dict
     }
 }
+
