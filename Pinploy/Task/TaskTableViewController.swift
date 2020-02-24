@@ -12,12 +12,17 @@ import AlamofireObjectMapper
 
 
 struct TaskView {
+    var id: Int
     var title: String
     var description: String
     var price: Int
     var image: String
+    var city: String
+    var zipCode: String
+    var userId: String
+    var firstName: String
+    var lastName: String
 }
-
 
 class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskTitle: UILabel!
@@ -25,7 +30,9 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskStatus: UILabel!
     @IBOutlet weak var taskPrice: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
-    
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var timeEstimate: UILabel!
+    @IBOutlet weak var username: UILabel!
 }
 
 class TaskTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -55,29 +62,23 @@ class TaskTableViewController: UIViewController, UITableViewDataSource, UITableV
         Alamofire.request(Constants.baseUrl+Constants.getTasksUrl, method: .get, headers: headers).responseArray { (response: DataResponse<[Task]>) in
             switch (response.result) {
             case .success:
-                
-                print(response.result)
-                
                 let myResponse = response.result.value
                 
                 if let taskList = myResponse {
                     for singleTask in taskList {
                         self.taskData.append(singleTask)
                     }
-                    print(self.taskData)
                 }
-                
                 self.taskTableView.reloadData()
                 /*
-                 for task in response.result {
-                 }
+                     for task in response.result {
+                     }
                  */
             case .failure(let error):
                 print(error)
             }
         }
     }
-    
     
     
     // MARK: - Table view data source
@@ -97,15 +98,21 @@ class TaskTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         let task = taskData[indexPath.row]
         cell.taskTitle?.text = task.title
-        //cell.taskPrice?.text = String(task.budget)
+        cell.taskPrice?.text = "\(task.budget!)"
         cell.taskDescription.text = task.description
-        
-        //cell.textLabel?.text = self.taskData[indexPath.row].user?.firstName
-        //cell.detailTextLabel?.text = self.taskData[indexPath.row].dueDate
-        
+        cell.taskStatus.text =  task.status
+        cell.location.text = "\(task.zipCode) \(task.city)"
+        cell.username.text = "\(task.user?.firstName)"
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\([indexPath.row])")
+        
+        // pass id here to fetch task
+        
+    }
     
     /*
      // Override to support conditional editing of the table view.

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Serpent
+
 
 struct Review {
     var id: Int? = 0
@@ -28,34 +28,3 @@ struct Review {
 }
 
 
-extension Review: Serializable {
-    init(dictionary: NSDictionary?) {
-        id         <== (self, dictionary, "id")
-        message    <== (self, dictionary, "message")
-        rating     <== (self, dictionary, "rating")
-        offerId    <== (self, dictionary, "offer_id")
-        offer      <== (self, dictionary, "offer")
-        fromUserId <== (self, dictionary, "from_user_id")
-        fromUser   <== (self, dictionary, "from_user")
-        toUserId   <== (self, dictionary, "to_user_id")
-        toUser     <== (self, dictionary, "to_user")
-        createdAt  <== (self, dictionary, "created_at")
-        updatedAt  <== (self, dictionary, "updated_at")
-    }
-
-    func encodableRepresentation() -> NSCoding {
-        let dict = NSMutableDictionary()
-        (dict, "id")           <== id
-        (dict, "message")      <== message
-        (dict, "rating")       <== rating
-        (dict, "offer_id")     <== offerId
-        (dict, "offer")        <== offer
-        (dict, "from_user_id") <== fromUserId
-        (dict, "from_user")    <== fromUser
-        (dict, "to_user_id")   <== toUserId
-        (dict, "to_user")      <== toUser
-        (dict, "created_at")   <== createdAt
-        (dict, "updated_at")   <== updatedAt
-        return dict
-    }
-}

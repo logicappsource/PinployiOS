@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import Serpent
+
 
 class AuthVC: UIViewController {
 
@@ -24,21 +24,21 @@ class AuthVC: UIViewController {
     @IBAction func auth(_ sender: Any) {
              let email = inputEmail.text
              let password = inputPassword.text
-             let params = ["email": email, "password": password]
        
-                Alamofire.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON {
-                    response in
-                    switch (response.result) {
-                    case .success:
-                           print(response.result)
-                           guard let user = response.value else { return }
-                           print(user)
-                           self.redirectHome()
-                       
-                    case .failure:
-                        print(Error.self)
-                    }
-                }
+             let params = ["email": email, "password": password]
+        
+        /*
+        APIClient.login(params: params) { (result) in
+           switch (result) {
+            case .success:
+                   print(result)
+                   guard let user = result.value else { return }
+                   print(user)
+            case .failure:
+                print(Error.self)
+            }
+        }
+        */
     
         }
         
@@ -59,14 +59,11 @@ class AuthVC: UIViewController {
                     print(error)
                 }
             }
-        
     }
     
     
     func redirectHome() -> Void {
         print("Redirect home")
-
-        
     }
   
 
