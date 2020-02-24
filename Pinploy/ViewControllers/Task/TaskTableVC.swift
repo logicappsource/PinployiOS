@@ -35,10 +35,9 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
 }
 
-class TaskTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var taskTableView: UITableView!
-    
     public var taskData = [Task]()
     
     override func viewDidLoad() {
@@ -63,24 +62,21 @@ class TaskTableViewController: UIViewController, UITableViewDataSource, UITableV
             switch (response.result) {
             case .success:
                 let myResponse = response.result.value
-                
-                if let taskList = myResponse {
-                    for singleTask in taskList {
-                        self.taskData.append(singleTask)
+                DispatchQueue.main.async {
+                    if let taskList = myResponse {
+                        for singleTask in taskList {
+                            self.taskData.append(singleTask)
+                        }
                     }
+                    self.taskTableView.reloadData()
                 }
-                self.taskTableView.reloadData()
-                /*
-                     for task in response.result {
-                     }
-                 */
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    
+
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,19 +97,30 @@ class TaskTableViewController: UIViewController, UITableViewDataSource, UITableV
         cell.taskPrice?.text = "\(task.budget!)"
         cell.taskDescription.text = task.description
         cell.taskStatus.text =  task.status
-        cell.location.text = "\(task.zipCode) \(task.city)"
-        cell.username.text = "\(task.user?.firstName)"
+        cell.location.text = "\(task.zipCode!) \(task.city!)"
+        cell.username.text = "\(task.user?.firstName!)"
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\([indexPath.row])")
-        
-        // pass id here to fetch task
-        
+        tableView.deselectRow(at: indexPath, animated: true)
+        // on click go to Task Detail => pass the task data
+        performSegue(withIdentifier: "navigateTaskDetail", sender: indexPath)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+         if segue.identifier == "navigateTaskDetail" {
+            if segue.destination.isKind(of: TaskDetailVC.self) {
+                 let taskDetail = segue.destination as! TaskDetailVC
+                 let indexPath = sender as! IndexPath
+                 taskDetail.taskDataDetail = taskData[indexPath.row]
+             }
+         }
+     }
+    
+ 
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
