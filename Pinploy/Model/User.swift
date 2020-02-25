@@ -12,6 +12,7 @@ import ObjectMapper
 
 struct User: Mappable { // codeable
     var id: Int? = 0
+    var token: String? = ""
     var firstName: String? = ""
     var lastName: String? = ""
     var email: String? = ""
@@ -57,14 +58,13 @@ struct User: Mappable { // codeable
     var createdAt: String? = ""
     var updatedAt: String? = ""
     
-    
     init?(map: Map) {
 
     }
 
     mutating func mapping(map: Map) {
-
-        id <- map["id"]
+        id <- map["userId"]
+        token <- map["id"]
         firstName <- map["firstName"]
         lastName <- map["lastName"]
         email <- map["email"]

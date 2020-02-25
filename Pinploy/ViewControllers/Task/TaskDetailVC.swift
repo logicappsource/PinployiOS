@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class TaskDetailVC: UIViewController {
     @IBOutlet weak var map: MKMapView!
@@ -45,13 +46,12 @@ class TaskDetailVC: UIViewController {
         let coordinateRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
         map.setRegion(coordinateRegion, animated: true)
         map.addAnnotation(annotation)
-        
     }
     
     
     func initUI(taskData: Task) {
         self.taskTitle.text = taskData.title
-        self.taskPrice.text = "\(taskData.budget!)"
+        self.taskPrice.text = "\(taskData.budget!),-"
         self.username.text = taskData.user?.firstName
         self.adress.text = taskData.city
         self.taskDescription.text = taskData.description
@@ -59,12 +59,33 @@ class TaskDetailVC: UIViewController {
         self.taskEstTime.text = taskData.estimationHours
         //self.profileImg.image = taskData.
         if (taskData.toolsNeeded == true) {
-            self.toolsNeeded.text = "Værktøj skal medbringes for at udføre denne opgave"
+            self.toolsNeeded.text = " Værktøj skal medbringes for at udføre denne opgave"
         }
         //self.taskImg.image = taskData.
     }
     
 
+    
+    @IBAction func bidOnTask(_ sender: Any) {
+            let headers: HTTPHeaders = [
+                  "Authorization": Constants.token,
+                  "Content-Type" :"application/json"
+              ]
+        // data message, taskId, ?priceBid
+        let offerParams = ["message": "sdf", "taskId": 2, "priceBid": 205] as [String : Any]
+        
+        Alamofire.request(Constants.baseUrl + Constants.offerUrl, method: .post, parameters: offerParams as Parameters, headers: headers).responseJSON { (response) in
+            switch (response.result) {
+            case .success:
+                print(response.result)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

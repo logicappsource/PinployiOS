@@ -17,4 +17,6 @@ struct Constants {
      // Tasks
      static let getTasksUrl = "tasks/pending"
      static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjc3Nywicm9sZSI6InVzZXIiLCJpYXQiOjE1ODIyMzAyMDgsImV4cCI6MTU4MjgzNTAwOH0.OI1ZH9bAQNlm4MlNY6D9Kd3cVlvl1gpgz3X56zKmcBk"
+    // Offer
+    static let offerUrl = "offer"
 }
