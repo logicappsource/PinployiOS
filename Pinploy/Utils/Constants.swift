@@ -18,6 +18,7 @@ struct Constants {
     
      // USERS
      static let usersBaseUrl = baseUrl + "/users"
+     static let getUserProfile = usersBaseUrl + "/"
      static let userLoginUrl = usersBaseUrl +  "/login"
      static let userSignUpUrl = usersBaseUrl + "/createaccount"
      // MARK: Not used

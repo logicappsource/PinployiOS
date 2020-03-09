@@ -10,6 +10,8 @@
 		7FA14DD904C50D1BF80DA148 /* Pods_Pinploy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE33A09BE99B5E84F74F1A7 /* Pods_Pinploy.framework */; };
 		D713BD90241662C1005A67E1 /* NavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D713BD8F241662C1005A67E1 /* NavViewController.swift */; };
 		D713BD9224166559005A67E1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D713BD9124166559005A67E1 /* APIManager.swift */; };
+		D713BD972416AB83005A67E1 /* myProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D713BD962416AB83005A67E1 /* myProfileVC.swift */; };
+		D713BD992416ABFE005A67E1 /* AccountInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D713BD982416ABFE005A67E1 /* AccountInfoVC.swift */; };
 		D7955AB823FF032E004E529F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7955AB723FF032E004E529F /* AppDelegate.swift */; };
 		D7955ABA23FF032E004E529F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7955AB923FF032E004E529F /* SceneDelegate.swift */; };
 		D7955ABC23FF032E004E529F /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7955ABB23FF032E004E529F /* AuthVC.swift */; };
@@ -36,6 +38,8 @@
 		5FE33A09BE99B5E84F74F1A7 /* Pods_Pinploy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinploy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D713BD8F241662C1005A67E1 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavViewController.swift; sourceTree = "<group>"; };
 		D713BD9124166559005A67E1 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		D713BD962416AB83005A67E1 /* myProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myProfileVC.swift; sourceTree = "<group>"; };
+		D713BD982416ABFE005A67E1 /* AccountInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoVC.swift; sourceTree = "<group>"; };
 		D7955AB423FF032E004E529F /* Pinploy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinploy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7955AB723FF032E004E529F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7955AB923FF032E004E529F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 				D713BD9124166559005A67E1 /* APIManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D713BD9524169E10005A67E1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D79E8BD324046D5100292FAE /* Profile */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		D7955AAB23FF032E004E529F = {
@@ -177,6 +189,8 @@
 		D79E8BD324046D5100292FAE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D713BD962416AB83005A67E1 /* myProfileVC.swift */,
+				D713BD982416ABFE005A67E1 /* AccountInfoVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -184,7 +198,7 @@
 		D7F73C1B24043FC8002F52C0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D79E8BD324046D5100292FAE /* Profile */,
+				D713BD9524169E10005A67E1 /* Settings */,
 				D7955AD023FF03F0004E529F /* Auth */,
 				D7955AD223FF1D3E004E529F /* Task */,
 				D713BD8F241662C1005A67E1 /* NavViewController.swift */,
@@ -315,11 +329,13 @@
 				D7F73C1D24043FFD002F52C0 /* TaskDetailVC.swift in Sources */,
 				D7955ADE23FFC086004E529F /* User.swift in Sources */,
 				D7955AE223FFC349004E529F /* Review.swift in Sources */,
+				D713BD992416ABFE005A67E1 /* AccountInfoVC.swift in Sources */,
 				D7955AB823FF032E004E529F /* AppDelegate.swift in Sources */,
 				D713BD90241662C1005A67E1 /* NavViewController.swift in Sources */,
 				D7955AE023FFC2C3004E529F /* Offer.swift in Sources */,
 				D7955ADC23FF2BEB004E529F /* Task.swift in Sources */,
 				D713BD9224166559005A67E1 /* APIManager.swift in Sources */,
+				D713BD972416AB83005A67E1 /* myProfileVC.swift in Sources */,
 				D7955AE623FFC5D3004E529F /* Message.swift in Sources */,
 				D79E8BD52405417E00292FAE /* TermsVC.swift in Sources */,
 				D7955AE423FFC3B7004E529F /* Comment.swift in Sources */,

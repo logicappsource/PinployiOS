@@ -6,36 +6,46 @@ PODS:
   - Kingfisher (5.13.2):
     - Kingfisher/Core (= 5.13.2)
   - Kingfisher/Core (5.13.2)
+  - NVActivityIndicatorView (4.8.0):
+    - NVActivityIndicatorView/Presenter (= 4.8.0)
+  - NVActivityIndicatorView/Presenter (4.8.0)
   - ObjectMapper (3.5.1)
   - Serpent (1.1.0):
     - Serpent/Core (= 1.1.0)
   - Serpent/Core (1.1.0)
   - SideMenu (6.4.7)
+  - SwiftKeychainWrapper (3.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireObjectMapper (~> 5.2)
   - Kingfisher (~> 5.0)
+  - NVActivityIndicatorView
   - Serpent (~> 1.0)
   - SideMenu (~> 6.0)
+  - SwiftKeychainWrapper
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireObjectMapper
     - Kingfisher
+    - NVActivityIndicatorView
     - ObjectMapper
     - Serpent
     - SideMenu
+    - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
   Kingfisher: d342c8354c10c3d85a27d6d4c42c41285924b898
+  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Serpent: 9b2995d24d090d0a7857b5e5c7691c5a57335d57
   SideMenu: 928a015669c3afc201e1fe3a87f1b0bc8993a664
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 0339b6d7efdcaebb090648f3b1bb30625381d630
+PODFILE CHECKSUM: 3a7e6bb05d9a4320ee296b4d3f68dc8d72e7e314
 
 COCOAPODS: 1.8.4

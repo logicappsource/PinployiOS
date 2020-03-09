@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftKeychainWrapper
 
 class AuthVC: UIViewController {
 
@@ -41,15 +42,19 @@ class AuthVC: UIViewController {
         Alamofire.request(Constants.userLoginUrl, method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<User>) in
                 switch (response.result) {
                 case .success:
-                    print(response.result)
-                    print(response)
+                       if let user = response.result.value {
+                        let userId = user.id
+                        let accessToken = user.token
                     
+                        let saveUserId: Bool = KeychainWrapper.standard.set(userId!, forKey: "userId")
+                        let saveAccessToken: Bool = KeychainWrapper.standard.set(accessToken!, forKey: "accessToken")
+                        
+                        print("Accesstoken + userId stored in keychain", saveUserId, saveAccessToken)
+                    }
                 case .failure(let error):
                     print(error)
                 }
             }
-        
-        
         }
         
     

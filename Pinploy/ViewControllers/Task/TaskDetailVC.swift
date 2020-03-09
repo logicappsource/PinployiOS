@@ -51,7 +51,7 @@ class TaskDetailVC: UIViewController {
     
     func initUI(taskData: Task) {
         self.taskTitle.text = taskData.title
-        self.taskPrice.text = "\(taskData.budget!),-"
+        self.taskPrice.text = "DKK \(taskData.budget!),-"
         self.username.text = taskData.user?.firstName
         self.adress.text = taskData.city
         self.taskDescription.text = taskData.description
@@ -67,21 +67,45 @@ class TaskDetailVC: UIViewController {
 
     
     @IBAction func bidOnTask(_ sender: Any) {
-            let headers: HTTPHeaders = [
-                  "Authorization": Constants.token,
-                  "Content-Type" :"application/json"
-              ]
-        // data message, taskId, ?priceBid
-        let offerParams = ["message": "sdf", "taskId": 2, "priceBid": 205] as [String : Any]
-        
-        Alamofire.request(Constants.baseUrl + Constants.createOffer, method: .post, parameters: offerParams as Parameters, headers: headers).responseJSON { (response) in
-            switch (response.result) {
-            case .success:
-                print(response.result)
-            case .failure(let error):
-                print(error)
-            }
+        let ac = UIAlertController(title: "Byd på opgave", message: nil, preferredStyle: .alert)
+        ac.addTextField { (textField) in
+            textField.placeholder = "Pris"
         }
+        
+        ac.addTextField { (textField) in
+            textField.placeholder = "Besked"
+        }
+               
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            let price = ac.textFields![0].text
+            let message = ac.textFields![1].text
+
+            self.bidOnTask(price: price!, message: message!)
+           }
+    
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+    
+    
+    func bidOnTask(price: String, message: String) -> Void {
+        
+        let headers: HTTPHeaders = [
+                         "Authorization": Constants.token,
+                         "Content-Type" :"application/json"
+                     ]
+               // data message, taskId, ?priceBid
+        let offerParams = ["message": message, "taskId": taskDataDetail?.id, "priceBid": Int(price)] as [String : Any]
+               
+               Alamofire.request(Constants.createOffer, method: .post, parameters: offerParams as Parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+                   switch (response.result) {
+                   case .success:
+                    print(response.result.value)
+                 
+                   case .failure(let error):
+                       print(error)
+                   }
+               }
     }
     
     

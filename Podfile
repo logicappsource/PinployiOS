@@ -11,4 +11,6 @@ target 'Pinploy' do
   pod 'AlamofireObjectMapper', '~> 5.2'
   pod 'SideMenu', '~> 6.0'
   pod 'Kingfisher', '~> 5.0'
+  pod 'NVActivityIndicatorView'
+  pod 'SwiftKeychainWrapper'
 end
