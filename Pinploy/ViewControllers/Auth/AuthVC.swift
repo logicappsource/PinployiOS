@@ -37,8 +37,8 @@ class AuthVC: UIViewController {
        
              let params = ["email": email, "password": password]
         
- 
-            Alamofire.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<User>) in
+    
+        Alamofire.request(Constants.userLoginUrl, method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<User>) in
                 switch (response.result) {
                 case .success:
                     print(response.result)
@@ -50,22 +50,6 @@ class AuthVC: UIViewController {
             }
         
         
-        /*
-        Alamofire.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            switch (response.result) {
-                
-            case .success:
-                print(response.result)
-                
-                // Store data into => User
-                // token
-                
-                self.redirectHome()
-            case .failure(let error):
-                print(error)
-                     }
-                }
-        */
         }
         
     

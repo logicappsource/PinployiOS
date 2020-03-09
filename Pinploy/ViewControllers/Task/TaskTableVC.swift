@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
-
+import Kingfisher
 
 struct TaskView {
     var id: Int
@@ -33,15 +33,17 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var timeEstimate: UILabel!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var taskCreated: UILabel!
 }
 
 class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var taskTableView: UITableView!
     public var taskData = [Task]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+  
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,29 +55,33 @@ class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     
     func fetchTasks(){
-        let headers: HTTPHeaders = [
-            "Authorization": Constants.token,
-            "Content-Type" :"application/json"
-        ]
-        
-        Alamofire.request(Constants.baseUrl+Constants.getTasksUrl, method: .get, headers: headers).responseArray { (response: DataResponse<[Task]>) in
-            switch (response.result) {
-            case .success:
-                let myResponse = response.result.value
-                DispatchQueue.main.async {
-                    if let taskList = myResponse {
-                        for singleTask in taskList {
-                            self.taskData.append(singleTask)
-                        }
-                    }
-                    self.taskTableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+         let headers: HTTPHeaders = [
+             "Authorization": Constants.token,
+             "Content-Type" :"application/json"
+         ]
+         
+         Alamofire.request(Constants.getPendingTaks, method: .get, headers: headers).responseArray { (response: DataResponse<[Task]>) in
+             switch (response.result) {
+             case .success:
+                 let myResponse = response.result.value
+                 print(myResponse)
+                 DispatchQueue.main.async {
+                     if let taskList = myResponse {
+                         for singleTask in taskList {
+                            print(singleTask)
+                             self.taskData.append(singleTask)
+                         }
+                     }
+                     self.taskTableView.reloadData()
+                 }
+             case .failure(let error):
+                 print(error)
+             }
+         }
+     }
+     
     
+
 
     // MARK: - Table view data source
     
@@ -94,11 +100,33 @@ class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
         let task = taskData[indexPath.row]
         cell.taskTitle?.text = task.title
-        cell.taskPrice?.text = "\(task.budget!)"
+        cell.taskPrice?.text = "DKK \(task.budget!)"
         cell.taskDescription.text = task.description
         cell.taskStatus.text =  task.status
-        cell.location.text = "\(task.zipCode!) \(task.city!)"
-        cell.username.text = "\(task.user?.firstName!)"
+        cell.username.text = "\(task.user!.firstName!) \(task.user!.lastName!.prefix(1))"
+        // date calc
+      //  let dateFormatter = DateFormatter()
+       // dateFormatter.dateFormat = "yyyy-MM-dd"
+        cell.taskCreated.text = "\(task.createdAt!)"
+        
+        
+        if let location = task.zipCode, task.city != nil {
+           cell.location.text = "\(task.zipCode!) \(task.city!)"
+        } else { cell.location.text = "Remote" }
+    
+        if let profileImg = task.user?.profileImg {
+            let url = URL(string: (task.user?.profileImg!)!)
+            if let profileImgData = try? Data(contentsOf: url!) {
+                if let profileImageFinal = UIImage(data: profileImgData){
+                    DispatchQueue.main.async {
+                        cell.profileImg.kf.setImage(with: url)
+                        cell.profileImg.layer.cornerRadius = cell.profileImg.frame.height / 2
+                        cell.profileImg.clipsToBounds = true
+                        cell.profileImg.image = profileImageFinal
+                    }
+                }
+            }
+        }
         return cell
     }
     

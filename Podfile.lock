@@ -1,0 +1,41 @@
+PODS:
+  - Alamofire (4.9.1)
+  - AlamofireObjectMapper (5.2.1):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
+  - Kingfisher (5.13.2):
+    - Kingfisher/Core (= 5.13.2)
+  - Kingfisher/Core (5.13.2)
+  - ObjectMapper (3.5.1)
+  - Serpent (1.1.0):
+    - Serpent/Core (= 1.1.0)
+  - Serpent/Core (1.1.0)
+  - SideMenu (6.4.7)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - AlamofireObjectMapper (~> 5.2)
+  - Kingfisher (~> 5.0)
+  - Serpent (~> 1.0)
+  - SideMenu (~> 6.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireObjectMapper
+    - Kingfisher
+    - ObjectMapper
+    - Serpent
+    - SideMenu
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
+  Kingfisher: d342c8354c10c3d85a27d6d4c42c41285924b898
+  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
+  Serpent: 9b2995d24d090d0a7857b5e5c7691c5a57335d57
+  SideMenu: 928a015669c3afc201e1fe3a87f1b0bc8993a664
+
+PODFILE CHECKSUM: 0339b6d7efdcaebb090648f3b1bb30625381d630
+
+COCOAPODS: 1.8.4

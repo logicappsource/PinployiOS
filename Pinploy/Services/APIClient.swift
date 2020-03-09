@@ -12,9 +12,9 @@ import AlamofireObjectMapper
 class APIClient {
     
 
-    static func login( params: Parameters, completion: @escaping(Result<User>) -> Void) {
+    static func login( params: Parameters, completion: @escaping(DataResponse<Any>) -> Void) {
         Alamofire.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            return response
+            completion(response)
                 }
            }
        

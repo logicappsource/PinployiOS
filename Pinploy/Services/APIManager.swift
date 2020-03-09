@@ -1,14 +1,17 @@
 //
-//  Constants.swift
+//  APIManager.swift
 //  Pinploy
 //
-//  Created by dev on 20/02/2020.
+//  Created by dev on 09/03/2020.
 //  Copyright © 2020 logicappsource. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Alamofire
 
-struct Constants {
+class APIManager: NSObject {
+    
+    static let sharedInstance = APIManager()
 
      // BASE
      // dev
@@ -16,19 +19,8 @@ struct Constants {
      static let baseUrl = "http://localhost:3000/api/"
      static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0OCwicm9sZSI6InVzZXIiLCJpYXQiOjE1ODM1ODgzNTUsImV4cCI6MTU4NDE5MzE1NX0.exWz2yjtebDoKbf-O_-D1GfXINCmkO3X7kqeEg6oJhU"
     
-     // USERS
-     static let usersBaseUrl = baseUrl + "/users"
-     static let userLoginUrl = usersBaseUrl +  "/login"
-     static let userSignUpUrl = usersBaseUrl + "/createaccount"
-     // MARK: Not used
-     static let userSocialLogin = usersBaseUrl + "/sociallogin"
-     static let userChangePassword = usersBaseUrl + "/change-password"
-     static let userForgotPassword = usersBaseUrl + "/forgot-password"
-     static let resetPassword = usersBaseUrl + "/reset-password"
-     static let verifyEmail = usersBaseUrl + "/verify-email"
-     static let resendVerifyEmail = usersBaseUrl + "/resend-email-verification"
-     static let contactUs = usersBaseUrl + "/contact-us-landing"
-     
+
+    
     
      // TASKS
      static let taskBaseUrl = baseUrl + "/tasks"
@@ -46,6 +38,33 @@ struct Constants {
      // PUT
      static let editTask = taskBaseUrl + "/:id"
     
+    
+    
+    
+    
+     // USERS
+     static let usersBaseUrl = baseUrl + "/users"
+     static let userLoginUrl = usersBaseUrl +  "/login"
+     static let userSignUpUrl = usersBaseUrl + "/createaccount"
+    
+    
+    static func login( params: Parameters, completion: @escaping(Result<User>) -> Void) {
+        Alamofire.request("https://api.pinploy.com/api/users/login", method: .post, parameters: params as Parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                      
+                        return response
+                }
+           }
+       
+    
+     // MARK: Not used
+     static let userSocialLogin = usersBaseUrl + "/sociallogin"
+     static let userChangePassword = usersBaseUrl + "/change-password"
+     static let userForgotPassword = usersBaseUrl + "/forgot-password"
+     static let resetPassword = usersBaseUrl + "/reset-password"
+     static let verifyEmail = usersBaseUrl + "/verify-email"
+     static let resendVerifyEmail = usersBaseUrl + "/resend-email-verification"
+     static let contactUs = usersBaseUrl + "/contact-us-landing"
+     
     
     
     // USER SETTINGS
@@ -128,7 +147,5 @@ struct Constants {
     static let getPaymentsMethods = paymentsBaseUrl + "/payment-method"
     // GET
     static let detachPaymentMethod = paymentsBaseUrl + "/payment-method/detach/:id"
-    
-    
-}
 
+}

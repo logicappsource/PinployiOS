@@ -74,7 +74,7 @@ class TaskDetailVC: UIViewController {
         // data message, taskId, ?priceBid
         let offerParams = ["message": "sdf", "taskId": 2, "priceBid": 205] as [String : Any]
         
-        Alamofire.request(Constants.baseUrl + Constants.offerUrl, method: .post, parameters: offerParams as Parameters, headers: headers).responseJSON { (response) in
+        Alamofire.request(Constants.baseUrl + Constants.createOffer, method: .post, parameters: offerParams as Parameters, headers: headers).responseJSON { (response) in
             switch (response.result) {
             case .success:
                 print(response.result)
