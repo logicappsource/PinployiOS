@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftKeychainWrapper
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -18,6 +18,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        self.window = self.window ?? UIWindow()
+
+       /*
+        let accessToken: String? = KeychainWrapper.standard.string(forKey: "accessToken")
+              if(accessToken != nil) {
+                  // Take users to home page
+                  let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                  let homeTaskPage = mainStoryboard.instantiateViewController(identifier: "TaskVC") as! TaskTableVC
+                  self.window.rootViewcontroller = homeTaskPage
+              }
+         */
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

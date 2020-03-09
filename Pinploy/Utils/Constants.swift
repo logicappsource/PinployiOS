@@ -7,18 +7,29 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
+import Alamofire
 
 struct Constants {
-
+    
+    static let userId: String! = KeychainWrapper.standard.string(forKey: "userId")!
+   
+    static let accessToken: String? = KeychainWrapper.standard.string(forKey: "accessToken")
+    
+    static let headers: HTTPHeaders = [
+                     "Authorization": accessToken!,
+                     "Content-Type" :"application/json"
+                 ]
+    
+    
      // BASE
-     // dev
-     // static let baseUrl = "http://dev.api.pinploy.com/api/"
+     // static let devBaseUrl = "http://dev.api.pinploy.com/api/"
      static let baseUrl = "http://localhost:3000/api/"
      static let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0OCwicm9sZSI6InVzZXIiLCJpYXQiOjE1ODM1ODgzNTUsImV4cCI6MTU4NDE5MzE1NX0.exWz2yjtebDoKbf-O_-D1GfXINCmkO3X7kqeEg6oJhU"
     
      // USERS
-     static let usersBaseUrl = baseUrl + "/users"
-     static let getUserProfile = usersBaseUrl + "/"
+     static let usersBaseUrl = baseUrl + "users"
+     static let getUserProfile = usersBaseUrl + "/\(userId)"
      static let userLoginUrl = usersBaseUrl +  "/login"
      static let userSignUpUrl = usersBaseUrl + "/createaccount"
      // MARK: Not used
@@ -32,7 +43,7 @@ struct Constants {
      
     
      // TASKS
-     static let taskBaseUrl = baseUrl + "/tasks"
+     static let taskBaseUrl = baseUrl + "tasks"
      static let getPendingTaks = taskBaseUrl + "/pending"
      // MARK: Not used
      static let getTask = taskBaseUrl + "/:id"
@@ -46,8 +57,6 @@ struct Constants {
      static let createTask = taskBaseUrl + "/"
      // PUT
      static let editTask = taskBaseUrl + "/:id"
-    
-    
     
     // USER SETTINGS
     // MARK: Not used

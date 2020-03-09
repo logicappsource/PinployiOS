@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftKeychainWrapper
 
 class AccountInfoVC: UIViewController {
     
@@ -22,18 +23,14 @@ class AccountInfoVC: UIViewController {
     
     
     func fetchUserProfile() {
-        
-        let headers: HTTPHeaders = [
-                  "Authorization": Constants.token,
-                  "Content-Type" :"application/json"
-              ]
-              
-        Alamofire.request("\(Constants.getUserProfile) + \(currentUser?.id)", method: .get, headers: headers).responseArray { (response: DataResponse<[User]>) in
+        print(Constants.getUserProfile)
+        Alamofire.request(Constants.getUserProfile, method: .get, headers: Constants.headers).responseArray { (response: DataResponse<[User]>) in
                   switch (response.result) {
                   case .success:
                       let myResponse = response.result.value
-                      print(myResponse)
+        
                       DispatchQueue.main.async {
+                          print(myResponse)
                       }
                   case .failure(let error):
                       print(error)

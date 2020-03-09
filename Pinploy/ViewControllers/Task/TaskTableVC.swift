@@ -43,8 +43,7 @@ class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-  
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -55,12 +54,8 @@ class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     
     func fetchTasks(){
-         let headers: HTTPHeaders = [
-             "Authorization": Constants.token,
-             "Content-Type" :"application/json"
-         ]
-         
-         Alamofire.request(Constants.getPendingTaks, method: .get, headers: headers).responseArray { (response: DataResponse<[Task]>) in
+ 
+        Alamofire.request(Constants.getPendingTaks, method: .get, headers: Constants.headers).responseArray { (response: DataResponse<[Task]>) in
              switch (response.result) {
              case .success:
                  let myResponse = response.result.value
@@ -81,8 +76,6 @@ class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
      }
      
     
-
-
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -104,8 +97,7 @@ class TaskTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         cell.taskDescription.text = task.description
         cell.taskStatus.text =  task.status
         cell.username.text = "\(task.user!.firstName!) \(task.user!.lastName!.prefix(1))"
-        // date calc
-      //  let dateFormatter = DateFormatter()
+       //  let dateFormatter = DateFormatter()
        // dateFormatter.dateFormat = "yyyy-MM-dd"
         cell.taskCreated.text = "\(task.createdAt!)"
         

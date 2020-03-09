@@ -43,10 +43,12 @@ class AuthVC: UIViewController {
                 switch (response.result) {
                 case .success:
                        if let user = response.result.value {
-                        let userId = user.id
+                        let userIdResponse = user.id
+                        let userId = "\(userIdResponse)"
                         let accessToken = user.token
-                    
-                        let saveUserId: Bool = KeychainWrapper.standard.set(userId!, forKey: "userId")
+                        print(userId, accessToken)
+                        
+                        let saveUserId: Bool = KeychainWrapper.standard.set(userId, forKey: "userId")
                         let saveAccessToken: Bool = KeychainWrapper.standard.set(accessToken!, forKey: "accessToken")
                         
                         print("Accesstoken + userId stored in keychain", saveUserId, saveAccessToken)

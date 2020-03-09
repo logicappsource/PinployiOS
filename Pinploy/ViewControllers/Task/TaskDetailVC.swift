@@ -90,14 +90,10 @@ class TaskDetailVC: UIViewController {
     
     func bidOnTask(price: String, message: String) -> Void {
         
-        let headers: HTTPHeaders = [
-                         "Authorization": Constants.token,
-                         "Content-Type" :"application/json"
-                     ]
-               // data message, taskId, ?priceBid
+        // data message, taskId, ?priceBid
         let offerParams = ["message": message, "taskId": taskDataDetail?.id, "priceBid": Int(price)] as [String : Any]
                
-               Alamofire.request(Constants.createOffer, method: .post, parameters: offerParams as Parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+        Alamofire.request(Constants.createOffer, method: .post, parameters: offerParams as Parameters, encoding: JSONEncoding.default, headers: Constants.headers).responseJSON { (response) in
                    switch (response.result) {
                    case .success:
                     print(response.result.value)
